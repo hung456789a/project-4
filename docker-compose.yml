@@ -4,8 +4,7 @@ services:
     container_name: nodejs
     ports:
       - "3000:3000"
-    depends_on:
-      - logstash
+
   kibana:
     image: docker.elastic.co/kibana/kibana:9.0.0
     ports:
