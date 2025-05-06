@@ -1,0 +1,10 @@
+{
+    "name": "nodejs-logstash",
+    "version": "1.0.0",
+    "main": "index.js",
+    "dependencies": {
+      "winston": "^3.10.0",
+      "winston-logstash": "^0.4.0"
+    }
+  }
+  
