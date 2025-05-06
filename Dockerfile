@@ -1,7 +1,7 @@
 FROM node:18
 WORKDIR /app
-COPY package.json ./
+COPY package.json ./app
 RUN npm init -y
-COPY index.js ./
+COPY index.js ./app
 EXPOSE 3000
-CMD ["node", "index.js"]
+CMD ["node", "/app/index.js"]
