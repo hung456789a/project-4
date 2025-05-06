@@ -1,6 +1,6 @@
 FROM node:18
 WORKDIR /app
-COPY index.js /app
+COPY . /app
 RUN npm init -y
 EXPOSE 3000
 ENTRYPOINT ["node","index.js"]
