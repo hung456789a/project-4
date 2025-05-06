@@ -1,16 +1,14 @@
-require('dotenv').config();
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const taskRoutes = require('./routes/taskRoutes');
+const net = require('net');
 
-const app = express();
-app.set('view engine', 'ejs');
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/', taskRoutes);
+const logstash = net.createConnection({ port: 5000, host: 'logstash' });
 
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => {
-    app.listen(3000, () => console.log('Server running on http://localhost:3000'));
-  })
-  .catch(err => console.log(err));
+function log(data) {
+  logstash.write(JSON.stringify({
+    app: 'todoapp',
+    level: 'info',
+    message: data,
+    timestamp: new Date()
+  }) + '\n');
+}
+
+log('Node.js app started');
