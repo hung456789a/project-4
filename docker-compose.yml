@@ -1,13 +1,10 @@
-version: '3.8'
 services:
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:9.0.0
-    environment:
-      - discovery.type=single-node
-      - xpack.security.enabled=false
+  nodejs:
+    build: ./node
     ports:
-      - "9200:9200"
-
+      - "3000:3000"
+    depends_on:
+      - logstash
   kibana:
     image: docker.elastic.co/kibana/kibana:9.0.0
     ports:
@@ -18,17 +15,17 @@ services:
       - elasticsearch
 
   logstash:
-    image: docker.elastic.co/logstash/logstash:8.13.0
+    image: docker.elastic.co/logstash/logstash:9.0.0
     volumes:
       - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf
     ports:
       - "5000:5000"
     depends_on:
       - elasticsearch
-
-  nodejs:
-    build: ./node
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.0.0
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
     ports:
-      - "3000:3000"
-    depends_on:
-      - logstash
+      - "9200:9200"
