@@ -5,7 +5,7 @@ const { LogstashTransport } = require('winston-logstash-transport');
 
 const logger = winston.createLogger({
   transports: [
-    new winston.transports.Logstash({
+    new LogstashTransport({
       port: 5000,
       node_name: 'my-node-app',
       host: 'localhost' // địa chỉ Logstash
