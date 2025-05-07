@@ -4,7 +4,13 @@ services:
     container_name: nodejs
     ports:
       - "3000:3000"
-
+  
+  mongodb:
+    image: mongo:6.0
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
   kibana:
     image: docker.elastic.co/kibana/kibana:9.0.0
     ports:
@@ -29,3 +35,5 @@ services:
       - xpack.security.enabled=false
     ports:
       - "9200:9200"
+volumes:
+  mongodb_data:
