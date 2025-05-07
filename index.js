@@ -1,7 +1,7 @@
 // index.js
 const http = require('http');
 const winston = require('winston');
-require('winston-logstash');
+const { LogstashTransport } = require('winston-logstash-transport');
 
 const logger = winston.createLogger({
   transports: [
